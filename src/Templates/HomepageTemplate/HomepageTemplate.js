@@ -1,5 +1,6 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Container } from '@chakra-ui/react'
 import React from 'react'
+import HomepageHeader from './HomepageHeader'
 
 export default function HomepageTemplate(props) {
     const { Component } = props
@@ -8,9 +9,13 @@ export default function HomepageTemplate(props) {
         <Box
             width="100%"
             height="100vh"
-            bgGradient='linear(to-tr, pink.500, orange.500)'
+            bgGradient='linear(to-tr, #FC277A, #FF6038)'
+            overflow="hidden"
         >
-            <Component />
+            <Container maxW="7xl">
+                <HomepageHeader />
+                <Component />
+            </Container>
         </Box>
     )
 }

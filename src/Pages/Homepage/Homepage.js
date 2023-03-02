@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Homepage() {
   const navigate = useNavigate()
-
   return (
     <Container maxW='8xl' paddingTop='5'>
       <div
