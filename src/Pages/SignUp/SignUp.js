@@ -50,7 +50,7 @@ export default function SignUp() {
   })
 
   return (
-    <Box height='100vh'>
+    <Box height='80vh'>
       <div
         style={{
           display: 'flex',
@@ -443,9 +443,6 @@ export default function SignUp() {
                   <Text
                     fontSize='xl'
                     fontWeight='medium'
-                    onClick={() => {
-                      navigate('/', { replace: false }) //temporary direct to home page
-                    }}
                   >
                     Register
                   </Text>
