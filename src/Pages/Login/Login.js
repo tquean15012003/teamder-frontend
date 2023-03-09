@@ -1,4 +1,4 @@
-import { Box, Button, Container, Input, InputGroup, InputLeftElement, InputRightElement, Text } from '@chakra-ui/react'
+import { Box, Input, InputGroup, InputLeftElement, InputRightElement, Text } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -74,7 +74,9 @@ export default function Login() {
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                             <Text onClick={() => {
                                 navigate("/signup", { replace: false })
-                            }} fontSize="xl" fontWeight="bold" color="white" cursor="pointer">Register now</Text>
+                            }} fontSize="xl" fontWeight="bold" color="white" cursor="pointer">
+                                Register now
+                            </Text>
                             <Box>
                                 <button type="submit" style={{ padding: "7px 25px", color: "white", backgroundColor: "#ED9B59", borderRadius: "10px" }}>
                                     <Text fontSize="xl" fontWeight="medium">Login</Text>
