@@ -25,7 +25,7 @@ const MatchInfo = () => {
         </Box>
 
         {/* Module or Project */}
-        <Box display='flex' m='auto'>
+        <Box display='flex' ml='auto' alignItems='center'>
           <Text fontSize='18px' fontWeight='bold' noOfLines={1}>
             Hackerthon
           </Text>
