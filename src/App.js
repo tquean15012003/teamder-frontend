@@ -10,6 +10,7 @@ import Login from './Pages/Login/Login'
 import SignUp from './Pages/SignUp/SignUp'
 import ChangePassword from './Pages/ChangePassword/ChangePassword'
 import PreviewProfile from './Pages/PreviewProfile/PreviewProfile'
+
 function App() {
   return (
     <Fragment>
@@ -20,7 +21,11 @@ function App() {
           path='/signup'
           element={<HomepageTemplate Component={SignUp} />}
         />
-        <Route path='/updateprofile' element={<UpdateProfile />} />
+
+        <Route
+          path='/changepassword'
+          element={<HomepageTemplate Component={ChangePassword} />}
+        />
 
         <Route
           path='/previewprofile'

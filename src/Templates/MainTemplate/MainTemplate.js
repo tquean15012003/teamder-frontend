@@ -1,4 +1,4 @@
-import { Box, Container } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 import TopMenu from '../../Components/TopMenu/TopMenu'
 
