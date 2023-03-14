@@ -24,7 +24,7 @@ export default function HomepageHeader() {
           fontWeight='bold'
           color='yellow.400'
         >
-          Teamder !!
+          Teamder
         </Text>
       </Box>
       <Box>
