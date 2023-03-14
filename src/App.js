@@ -8,6 +8,8 @@ import SignUp from './Pages/SignUp/SignUp'
 import ChangePassword from './Pages/ChangePassword/ChangePassword'
 import Sidebartest from './Pages/Sidebartest'
 import HomepageHeader from './Templates/HomepageTemplate/HomepageHeader'
+import UpdateProfile from './Pages/UpdateProfile/UpdateProfile'
+
 function App() {
   return (
     <Fragment>
@@ -18,11 +20,7 @@ function App() {
           path='/signup'
           element={<HomepageTemplate Component={SignUp} />}
         />
-
-        <Route
-          path='/changepassword'
-          element={<HomepageTemplate Component={ChangePassword} />}
-        />
+        <Route path='/updateprofile' element={<UpdateProfile />} />
 
         {/* to be deleted when merging  */}
         <Route path='/test' element={<Sidebartest />} />
