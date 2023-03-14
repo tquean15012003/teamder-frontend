@@ -1,11 +1,10 @@
-import Sidebar from '../Components/Sidebar/Sidebar'
-//purely for testing. to be deleted when merging
-const sidebartest = () => {
+const Sidebartest = () => {
+  console.log("HERERERER")
   return (
-    <>
-      <Sidebar />
-    </>
+    <h1>
+      test test test test testwsafds dfasdfadsfdfdddddddddddddsdfd
+    </h1>
   )
 }
 
-export default sidebartest
+export default Sidebartest
