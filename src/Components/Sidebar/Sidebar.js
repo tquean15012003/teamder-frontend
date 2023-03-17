@@ -6,6 +6,7 @@ import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false)
+
   return (
     <>
       {open && (
@@ -13,7 +14,7 @@ const Sidebar = () => {
           pos='sticky'
           h='100vh'
           boxShadow='0 4px 12px 0 rgba(0, 0, 0, 0.05)'
-          w='280px'
+          w='350px'
           flexDir='column'
         >
           {/* User Header*/}

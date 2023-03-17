@@ -10,6 +10,7 @@ import Login from './Pages/Login/Login'
 import SignUp from './Pages/SignUp/SignUp'
 import ChangePassword from './Pages/ChangePassword/ChangePassword'
 import PreviewProfile from './Pages/PreviewProfile/PreviewProfile'
+
 function App() {
   return (
     <Fragment>
