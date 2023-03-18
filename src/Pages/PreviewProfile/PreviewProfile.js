@@ -8,9 +8,9 @@ const PreviewProfile = () => {
           <Heading fontWeight='600' color='gray.700' fontSize='45px' mb='20px'>
             Settings
           </Heading>
-
-          <HStack spacing='75px' fontSize='25px'>
+          <HStack spacing='20px' fontSize='25px'>
             <Box
+              padding="0px 10px"
               background='#FFC7C7'
               borderRadius='10px'
               cursor='pointer'
@@ -26,6 +26,7 @@ const PreviewProfile = () => {
               </Text>
             </Box>
             <Box
+              padding="0px 10px"
               background='white'
               borderRadius='10px'
               cursor='pointer'
@@ -41,6 +42,7 @@ const PreviewProfile = () => {
               </Text>
             </Box>
             <Box
+              padding="0px 10px"
               background='white'
               borderRadius='10px'
               cursor='pointer'

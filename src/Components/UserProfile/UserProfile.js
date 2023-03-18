@@ -12,12 +12,13 @@ import {
   Wrap,
   WrapItem,
   Divider,
+  Flex,
 } from '@chakra-ui/react'
 import { GrLocation } from 'react-icons/gr'
 
 const UserProfile = () => {
   return (
-    <Box display='flex' justifyContent='center' m='50px'>
+    <Flex display='flex' justify='center' align="center" p='50px'>
       <Card>
         <CardBody display='flex'>
           {/* Display Picture & Name */}
@@ -39,10 +40,10 @@ const UserProfile = () => {
             >
               <Text>John Cena An</Text>
 
-              <Box display='flex'>
+              <Flex align="center" justify="center">
                 <GrLocation />
                 <Text ml='2'>NTU</Text>
-              </Box>
+              </Flex>
             </Box>
           </Box>
 
@@ -276,7 +277,7 @@ const UserProfile = () => {
           </Container>
         </CardBody>
       </Card>
-    </Box>
+    </Flex>
   )
 }
 

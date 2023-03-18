@@ -3,9 +3,12 @@ import { useState } from 'react'
 import img from '../../Assets/ProfileImages/HarryPic.jfif' //test image
 import MatchInfo from './MatchInfo'
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
+import { useNavigate } from 'react-router-dom'
 
 const Sidebar = () => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
+
+  const navigate = useNavigate()
 
   return (
     <>
@@ -33,6 +36,9 @@ const Sidebar = () => {
               size='lg'
               marginLeft='20px'
               cursor='pointer'
+              onClick={() => {
+                navigate('/swipe', {replace: false})
+              }}
             />
             <Text color='white' fontSize='18px' fontWeight='bold' pr='20px'>
               Tran Que An
@@ -76,6 +82,7 @@ const Sidebar = () => {
           boxShadow='0 4px 12px 0 rgba(0, 0, 0, 0.05)'
           w='40px'
           flexDir='column'
+          bgGradient='linear(to-tr, #FC277A, #FF6038)'
         >
           <Box
             width='100%'
@@ -89,6 +96,7 @@ const Sidebar = () => {
               fontSize='30px'
               onClick={() => setOpen(!open)}
               cursor='pointer'
+              color="white"
             />
           </Box>
         </Flex>
