@@ -43,44 +43,38 @@ const GeneralSetting = () => {
           <Text color="#606162" fontWeight="bold" fontSize="xl" mb="3">
             Email
           </Text>
-          <InputGroup
+          <Input
             width="75%"
             size="lg"
             backgroundColor="white"
             borderRadius="7px"
             marginBottom="4"
-          >
-            <Input
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              required
-              id="email"
-              type="email"
-              placeholder="Email"
-            />
-          </InputGroup>
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            required
+            id="email"
+            type="email"
+            placeholder="Email"
+          />
         </Flex>
         {/* Phone number */}
         <Flex justifyContent="space-between" alignItems="center">
           <Text color="#606162" fontWeight="bold" fontSize="xl" mb="3">
             Phone number
           </Text>
-          <InputGroup
+          <Input
             width="75%"
             size="lg"
             backgroundColor="white"
             borderRadius="7px"
             marginBottom="4"
-          >
-            <Input
-              value={formik.values.phoneNumber}
-              onChange={formik.handleChange}
-              required
-              id="phoneNumber"
-              type="tel"
-              placeholder="Phone number"
-            />
-          </InputGroup>
+            value={formik.values.phoneNumber}
+            onChange={formik.handleChange}
+            required
+            id="phoneNumber"
+            type="tel"
+            placeholder="Phone number"
+          />
         </Flex>
         <hr
           style={{
@@ -98,66 +92,57 @@ const GeneralSetting = () => {
           <Text color="#606162" fontWeight="bold" fontSize="xl" mb="3">
             Location
           </Text>
-          <InputGroup
+          <Input
             width="75%"
             size="lg"
             backgroundColor="white"
             borderRadius="7px"
             marginBottom="4"
-          >
-            <Input
-              value={formik.values.location}
-              onChange={formik.handleChange}
-              required
-              id="location"
-              type="text"
-              placeholder="Location"
-            />
-          </InputGroup>
+            value={formik.values.location}
+            onChange={formik.handleChange}
+            required
+            id="location"
+            type="text"
+            placeholder="Location"
+          />
         </Flex>
         {/* Looking for skills */}
         <Flex justifyContent="space-between" alignItems="center">
           <Text color="#606162" fontWeight="bold" fontSize="xl" mb="3">
             Looking for skills
           </Text>
-          <InputGroup
+          <Input
             width="75%"
             size="lg"
             backgroundColor="white"
             borderRadius="7px"
             marginBottom="4"
-          >
-            <Input
-              value={formik.values.skills}
-              onChange={formik.handleChange}
-              required
-              id="skills"
-              type="text"
-              placeholder="Skills"
-            />
-          </InputGroup>
+            value={formik.values.skills}
+            onChange={formik.handleChange}
+            required
+            id="skills"
+            type="text"
+            placeholder="Skills"
+          />
         </Flex>
         {/* Goals */}
         <Flex justifyContent="space-between" alignItems="center">
           <Text color="#606162" fontWeight="bold" fontSize="xl" mb="3">
             Goals
           </Text>
-          <InputGroup
+          <Input
             width="75%"
             size="lg"
             backgroundColor="white"
             borderRadius="7px"
             marginBottom="4"
-          >
-            <Input
-              value={formik.values.goals}
-              onChange={formik.handleChange}
-              required
-              id="goals"
-              type="text"
-              placeholder="Goals"
-            />
-          </InputGroup>
+            value={formik.values.goals}
+            onChange={formik.handleChange}
+            required
+            id="goals"
+            type="text"
+            placeholder="Goals"
+          />
         </Flex>
       </form>
     </Box>
