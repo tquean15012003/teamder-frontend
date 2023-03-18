@@ -10,7 +10,7 @@ const TopMenu = () => {
         pos='fixed'
         right='30'
         top='0'
-        pt='20px'
+        pt='30px'
         transition='all 0.2s'
       >
         <FiMenu fontSize='30px' />
@@ -22,7 +22,9 @@ const TopMenu = () => {
           Change Password
         </MenuItem>
         {/*only if user if logged in */}
-        <MenuItem>Logout</MenuItem>
+        <MenuItem
+          onClick={() => navigate('/', { replace: false })}
+        >Logout</MenuItem>
       </MenuList>
     </Menu>
   )
