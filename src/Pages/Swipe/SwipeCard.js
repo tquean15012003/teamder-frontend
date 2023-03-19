@@ -19,8 +19,6 @@ import React from 'react'
 
 export default function SwipeCard(props) {
 
-    const { image, color } = props
-
     return (
         <Flex display='flex' justify='center' align="center" p='50px'>
             <Card>
