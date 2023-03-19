@@ -1,4 +1,4 @@
-import { Box, Text, Input, InputGroup, Flex } from "@chakra-ui/react";
+import { Box, Text, Input, Flex } from "@chakra-ui/react";
 import { useFormik } from "formik";
 
 const GeneralSetting = () => {

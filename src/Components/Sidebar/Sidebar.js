@@ -3,19 +3,23 @@ import { useState } from 'react'
 import img from '../../Assets/ProfileImages/HarryPic.jfif' //test image
 import MatchInfo from './MatchInfo'
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true)
 
   const navigate = useNavigate()
 
+  const { pathname } = useLocation()
+
+  console.log(pathname)
+
   return (
     <>
       {open && (
         <Flex
           pos='sticky'
-          h='100vh'
+          minHeight='100vh'
           boxShadow='0 4px 12px 0 rgba(0, 0, 0, 0.05)'
           w='350px'
           flexDir='column'
@@ -37,7 +41,11 @@ const Sidebar = () => {
               marginLeft='20px'
               cursor='pointer'
               onClick={() => {
-                navigate('/swipe', {replace: false})
+                if (pathname !== "/swipe") {
+                  navigate('/swipe', { replace: false })
+                } else {
+                  navigate('/previewprofile', { replace: false })
+                }
               }}
             />
             <Text color='white' fontSize='18px' fontWeight='bold' pr='20px'>
