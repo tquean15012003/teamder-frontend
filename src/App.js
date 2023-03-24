@@ -11,6 +11,7 @@ import SignUp from './Pages/SignUp/SignUp'
 import ChangePassword from './Pages/ChangePassword/ChangePassword'
 import PreviewProfile from './Pages/PreviewProfile/PreviewProfile'
 import Swipe from './Pages/Swipe/Swipe'
+import SelectModule from './Pages/SelectModule/SelectModule'
 
 function App() {
   return (
@@ -33,11 +34,12 @@ function App() {
           element={<MainTemplate Component={PreviewProfile} />}
         />
 
-        <Route
-          path='/swipe'
-          element={<MainTemplate Component={Swipe} />}
-        />
+        <Route path='/swipe' element={<MainTemplate Component={Swipe} />} />
 
+        <Route
+          path='/selectmodule'
+          element={<MainTemplate Component={SelectModule} />}
+        />
       </Routes>
     </Fragment>
   )
