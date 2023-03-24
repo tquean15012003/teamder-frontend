@@ -41,7 +41,7 @@ const Sidebar = () => {
               marginLeft='20px'
               cursor='pointer'
               onClick={() => {
-                if (pathname !== "/swipe") {
+                if (pathname !== '/swipe') {
                   navigate('/swipe', { replace: false })
                 } else {
                   navigate('/previewprofile', { replace: false })
@@ -86,7 +86,7 @@ const Sidebar = () => {
       {!open && (
         <Flex
           pos='sticky'
-          h='100vh'
+          minHeight='100vh'
           boxShadow='0 4px 12px 0 rgba(0, 0, 0, 0.05)'
           w='40px'
           flexDir='column'
@@ -104,7 +104,7 @@ const Sidebar = () => {
               fontSize='30px'
               onClick={() => setOpen(!open)}
               cursor='pointer'
-              color="white"
+              color='white'
             />
           </Box>
         </Flex>
