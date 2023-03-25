@@ -1,11 +1,11 @@
-import UserProfile from '../../Components/UserProfile/UserProfile'
+import UserProfile from './UserProfile'
 import { Box, Heading, Container, HStack, Text } from '@chakra-ui/react'
 import { useState } from 'react'
-import GeneralSetting from '../../Components/Setting/GeneralSetting'
-import ProfileSetting from '../../Components/Setting/ProfileSetting'
+import ProfileSetting from './ProfileSetting'
+
 const PreviewProfile = () => {
 
-  const [whichActive, setWhichActive] = useState(1)
+  const [whichActive, setWhichActive] = useState(true)
 
   return (
     <>
@@ -26,29 +26,13 @@ const PreviewProfile = () => {
                 transition: '0.2s',
                 transitionTimingFunction: 'ease-in-out',
               }}
-              onClick={() => {setWhichActive(1)}}
+              onClick={() => { setWhichActive(true) }}
             >
               <Text fontWeight='bold' p='2' color={whichActive === 1 ? "#FF0000" : "black"}>
                 Preview
               </Text>
             </Box>
-            <Box
-              padding="0px 10px"
-              background={whichActive === 2 ? "#FFC7C7" : "white"}
-              borderRadius='10px'
-              cursor='pointer'
-              _hover={{
-                shadow: 'md',
-                transform: 'translateY(-5px)',
-                transition: '0.2s',
-                transitionTimingFunction: 'ease-in-out',
-              }}
-              onClick={() => {setWhichActive(2)}}
-            >
-              <Text fontWeight='bold' p='2' color={whichActive === 2 ? "#FF0000" : "black"}>
-                General
-              </Text>
-            </Box>
+
             <Box
               padding="0px 10px"
               background={whichActive === 3 ? "#FFC7C7" : "white"}
@@ -60,7 +44,7 @@ const PreviewProfile = () => {
                 transition: '0.2s',
                 transitionTimingFunction: 'ease-in-out',
               }}
-              onClick={() => {setWhichActive(3)}}
+              onClick={() => { setWhichActive(false) }}
             >
               <Text fontWeight='bold' p='2' color={whichActive === 3 ? "#FF0000" : "black"}>
                 Profile
@@ -69,9 +53,9 @@ const PreviewProfile = () => {
           </HStack>
         </Box>
         {
-          whichActive === 1 ? <UserProfile /> : whichActive === 2 ? <GeneralSetting/> : <ProfileSetting/>
+          whichActive ? <UserProfile /> : <ProfileSetting />
         }
-        
+
       </Container>
     </>
   )

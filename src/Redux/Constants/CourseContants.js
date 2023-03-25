@@ -1,0 +1,1 @@
+export const SET_ALL_COURSES = "SET_ALL_COURSES"

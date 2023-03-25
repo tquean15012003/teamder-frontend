@@ -4,15 +4,16 @@ import img from '../../Assets/ProfileImages/HarryPic.jfif' //test image
 import MatchInfo from './MatchInfo'
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true)
 
+  const { userInfo } = useSelector(state => state.UserReducer)
+
   const navigate = useNavigate()
 
   const { pathname } = useLocation()
-
-  console.log(pathname)
 
   return (
     <>
@@ -21,7 +22,7 @@ const Sidebar = () => {
           pos='sticky'
           minHeight='100vh'
           boxShadow='0 4px 12px 0 rgba(0, 0, 0, 0.05)'
-          w='350px'
+          minW='300px'
           flexDir='column'
         >
           {/* User Header*/}
@@ -41,15 +42,15 @@ const Sidebar = () => {
               marginLeft='20px'
               cursor='pointer'
               onClick={() => {
-                if (pathname !== '/swipe') {
-                  navigate('/swipe', { replace: false })
+                if (pathname !== '/selectmodule') {
+                  navigate('/selectmodule', { replace: false })
                 } else {
                   navigate('/previewprofile', { replace: false })
                 }
               }}
             />
             <Text color='white' fontSize='18px' fontWeight='bold' pr='20px'>
-              Tran Que An
+              {userInfo.name}
             </Text>
 
             <AiOutlineArrowLeft

@@ -1,44 +1,61 @@
 import { Box, Input, InputGroup, InputLeftElement, InputRightElement, Text } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
+import { signUpAction } from '../../Redux/Actions/AuthActions'
 
 export default function SignUp() {
   const [hiddenPassword, setHiddenPassword] = useState(true)
+
   const [hiddenConfirmPassword, setHiddenConfirmPassword] = useState(true)
+
   const navigate = useNavigate()
+
+  const dispatch = useDispatch()
+
   const formik = useFormik({
     initialValues: {
       email: '',
       username: '',
       password: '',
       confirmPassword: '',
+      phoneNumber: ""
     },
 
     validationSchema: Yup.object({
-      email: Yup.string().email('Invalid email!'), //email
-      username: Yup.string() //username
+      email: Yup.string()
+        .required("Please enter your email")
+        .email('Invalid email!'), 
+      username: Yup.string()
+        .required("Please enter your username")
         .min(8, 'Minimum 8 characters required')
         .max(20, 'Maximum 20 characters only'),
+
       password: Yup.string()
+        .required('Please enter your  password')
         .min(8, 'At least 8 characters!')
         .max(30, 'At most 30 characters!')
         .matches(
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,30})/,
           'At least one uppercase, one lowercase and one number'
         ),
-      confirmPassword: Yup.string().oneOf(
-        [Yup.ref('password'), null],
-        'Passwords must match'
-      ),
+      confirmPassword: Yup.string()
+        .required('Please enter your confirm password')
+        .oneOf(
+          [Yup.ref('password'), null],
+          'Passwords must match'
+        ),
+      phoneNumber: Yup.string()
+        .required('Please enter your phone number')
+        .matches(/(6|8|9)\d{7}/, "Please enter correct phone number")
+        .min(8, 'Phone number must have exactly 8 numbers')
+        .max(8, 'Phone number must have exactly 8 numbers')
     }),
 
     onSubmit: (values) => {
-      // TO-DO
-      // dispatch after setting up redux
-
-      console.log(values)
+      dispatch(signUpAction(values, navigate))
     },
   })
 
@@ -391,6 +408,61 @@ export default function SignUp() {
                   </Text>
                 )}
             </Box>
+
+            {/* Phone Numebr */}
+            <Box marginBottom='4'>
+              <InputGroup
+                size='lg'
+                backgroundColor='gray.200'
+                borderRadius='7px'
+              >
+                <InputLeftElement
+                  backgroundColor='gray.200'
+                  borderRight='1px'
+                  borderColor='gray.400'
+                  borderLeftRadius='7px'
+                  shadow=''
+                >
+                  <svg
+                    style={{ width: '50px', height: '50px' }}
+                    width='68'
+                    height='68'
+                    viewBox='0 0 68 68'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'
+                  >
+                    <path
+                      d='M50.4207 58.6667C49.4522 55.6544 47.3179 52.9926 44.3489 51.0941C41.38 49.1957 37.7423 48.1666 34 48.1666C30.2577 48.1666 26.62 49.1957 23.6511 51.0941C20.6821 52.9926 18.5478 55.6544 17.5793 58.6667'
+                      stroke='#7D8790'
+                      strokeWidth='2'
+                    />
+                    <circle
+                      cx='34'
+                      cy='28.3334'
+                      r='8.5'
+                      stroke='#7D8790'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                    />
+                  </svg>
+                </InputLeftElement>
+                <Input
+                  value={formik.values.phoneNumber}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  required
+                  id='phoneNumber'
+                  type='text'
+                  placeholder='Phone number'
+                  marginLeft='3'
+                />
+              </InputGroup>
+              {formik.touched.phoneNumber && formik.errors.phoneNumber && (
+                <Text color='white' fontWeight='bold'>
+                  {formik.errors.phoneNumber}
+                </Text>
+              )}
+            </Box>
             <div
               style={{
                 display: 'flex',
@@ -399,7 +471,7 @@ export default function SignUp() {
               }}
             >
               <div style={{ marginRight: '25px' }}>
-                <Text fontSize='lg' fontweight='bold' color='white'>
+                <Text fontSize='lg' fontWeight='bold' color='white'>
                   Already have an account?
                 </Text>
                 <Text
