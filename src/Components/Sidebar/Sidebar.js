@@ -6,10 +6,126 @@ import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+//hard coded data for demo
+const data = [
+  {
+    name: 'John Barton',
+    img: 'https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg',
+    school: 'NTU',
+    matched: 'SC3040',
+    course: 'CE',
+    yearOfStudy: '3',
+    CGPA: '4.00-4.50',
+    bio: 'Energetic about the hardware products',
+    skills: ['Java', 'Flutter', 'DevOps', 'HTML', 'CSS', 'Agile', 'Waterfall'],
+    lookingFor: ['SC3040', 'SC3010'],
+    linkedin: 'John Barton',
+    github: '@john_bar',
+    telegram: '@john_barton',
+    instagram: '@john_barton',
+  },
+  {
+    name: 'Christopher Tan',
+    img: 'https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg',
+    school: 'NTU',
+    matched: 'SC1006',
+    course: 'DSAI',
+    yearOfStudy: '1',
+    CGPA: '3.50-4.00',
+    bio: 'Looking for Groupmates in DSAI Course',
+    skills: ['Python', 'Flutter', 'TensorFlow', 'Pandas', 'Java'],
+    lookingFor: ['SC1006', 'SC2002'],
+    linkedin: 'Christopher Tan',
+    github: '@chris_tan',
+    telegram: '@chris_tan',
+    instagram: '@chrissss',
+  },
+  {
+    name: 'Joe',
+    img: 'https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg',
+    school: 'NTU',
+    matched: 'Hackathon',
+    course: 'BCG',
+    yearOfStudy: '3',
+    CGPA: '4.50-5.00',
+    bio: 'Changing the world, one step at a time',
+    skills: [
+      'Java',
+      'Nest.js',
+      'Vue.js',
+      'Next.js',
+      'Flutter',
+      'DevOps',
+      'HTML',
+      'CSS',
+      'Agile',
+      'Waterfall',
+    ],
+    lookingFor: ['Hackathon', 'SC3040'],
+    linkedin: 'Joe_Malone',
+    github: '@joe_is_alone',
+    telegram: '@joe_mama',
+    instagram: '@joe_m_lone',
+  },
+  {
+    name: 'Andy Koh',
+    img: 'https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg',
+    school: 'NTU',
+    matched: 'SC2006',
+    course: 'BCE',
+    yearOfStudy: '2',
+    CGPA: '4.50-5.00',
+    bio: 'Looking for passionate groupmates',
+    skills: [
+      'Java',
+      'Flutter',
+      'DevOps',
+      'HTML',
+      'CSS',
+      'Agile',
+      'Waterfall',
+      'Rust',
+      'Angular',
+    ],
+    lookingFor: ['SC2006'],
+    linkedin: 'Andy Koh',
+    github: '@&dykoh',
+    telegram: '@&dy',
+    instagram: '@&dykohmama',
+  },
+  {
+    name: 'Chan Wei Ming',
+    img: 'https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg',
+    school: 'NUS',
+    matched: 'SC3040',
+    course: 'CS',
+    yearOfStudy: '2',
+    CGPA: '4.00-4.50',
+    bio: 'Exchange student looking for a teammate',
+    skills: [
+      'Java',
+      'Flutter',
+      'DevOps',
+      'HTML',
+      'React',
+      'CSS',
+      'Agile',
+      'Waterfall',
+    ],
+    lookingFor: ['SC3040'],
+    linkedin: 'Chan Wei Ming',
+    github: '@c_w_m200',
+    telegram: '@cwmingwwww',
+    instagram: '@cwminggggg',
+  },
+]
+
 const Sidebar = () => {
+  //to be fetched when the backend algorithm works
+  const matchedUsers = data
   const [open, setOpen] = useState(true)
 
-  const { userInfo } = useSelector(state => state.UserReducer)
+  const { userInfo } = useSelector((state) => state.UserReducer)
 
   const navigate = useNavigate()
 
@@ -71,14 +187,9 @@ const Sidebar = () => {
             <Divider orientation='horizontal' borderColor='black' />
             <Flex display='flex' flexDir='column'>
               {/*placeholder for later */}
-              <MatchInfo />
-
-              <MatchInfo />
-              <MatchInfo />
-              <MatchInfo />
-
-              <MatchInfo />
-              <MatchInfo />
+              {matchedUsers.map((user, index) => (
+                <MatchInfo userInfo={user} key={index} />
+              ))}
             </Flex>
           </>
         </Flex>
