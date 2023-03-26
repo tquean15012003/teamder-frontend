@@ -1,20 +1,24 @@
 import { Box, Input, InputGroup, InputLeftElement, InputRightElement, Text } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { logInAction } from '../../Redux/Actions/AuthActions'
 
 export default function Login() {
     const [hidden, setHidden] = useState(true)
 
     const navigate = useNavigate()
 
+    const dispatch = useDispatch()
+
     const formik = useFormik({
         initialValues: {
-            email: "",
+            username: "",
             password: "",
         },
         onSubmit: (values) => {
-            console.log(values)
+            dispatch(logInAction(values, navigate))
         }
     })
 
@@ -31,11 +35,11 @@ export default function Login() {
                                 </svg>
                             </InputLeftElement>
                             <Input
-                                value={formik.values.email}
+                                value={formik.values.username}
                                 onChange={formik.handleChange}
                                 required
-                                id="email"
-                                type='email' placeholder='Email' marginLeft="3" />
+                                id="username"
+                                type='text' placeholder='Username' marginLeft="3" />
                         </InputGroup>
 
                         <InputGroup size="lg" backgroundColor="gray.200" borderRadius="7px" marginBottom="4">
