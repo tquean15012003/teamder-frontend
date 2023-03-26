@@ -6,14 +6,14 @@ const Searchbar = () => {
 
   //to do implement search algorithm
   return (
-    <Box mt='2%' mb='3%' w="90%">
+    <Box mt='2%' mb='3%' w='90%'>
       <InputGroup>
         <Input
           size='lg'
           placeholder='Search modules'
           onChange={(e) => setText(e.target)}
-          color="black"
-          borderColor="black"
+          color='black'
+          borderColor='black'
         ></Input>
         <InputRightElement>
           <AiOutlineSearch />

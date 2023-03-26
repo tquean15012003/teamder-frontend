@@ -1,21 +1,18 @@
 import Searchbar from '../../Components/Searchbar/Searchbar'
 import Module from '../../Components/Module/Module'
 import { Container, Grid } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllCoursesAction } from '../../Redux/Actions/CourseAction'
 
 const SelectModule = () => {
-
-  const { courses } = useSelector(state => state.CourseReducer)
+  const { courses } = useSelector((state) => state.CourseReducer)
 
   const dispatch = useDispatch()
 
   const displayCourseSelection = () => {
     return courses.map((course) => {
-      return (
-        <Module course={course} key={course.course} />
-      )
+      return <Module course={course} key={course.course} />
     })
   }
 

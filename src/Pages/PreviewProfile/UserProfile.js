@@ -15,11 +15,10 @@ import {
   Flex,
 } from '@chakra-ui/react'
 import { GrLocation } from 'react-icons/gr'
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
 
 const UserProfile = () => {
-
-  const { userInfo } = useSelector(state => state.UserReducer)
+  const { userInfo } = useSelector((state) => state.UserReducer)
 
   const displaySkills = () => {
     return userInfo.skills.map((skill) => {
@@ -56,7 +55,7 @@ const UserProfile = () => {
   }
 
   return (
-    <Flex display='flex' justify='center' align="center" p='50px'>
+    <Flex display='flex' justify='center' align='center' p='50px'>
       <Card>
         <CardBody display='flex'>
           {/* Display Picture & Name */}
@@ -78,7 +77,7 @@ const UserProfile = () => {
             >
               <Text>{userInfo.name}</Text>
 
-              <Flex align="center" justify="center">
+              <Flex align='center' justify='center'>
                 <GrLocation />
                 <Text ml='2'>{userInfo.school}</Text>
               </Flex>

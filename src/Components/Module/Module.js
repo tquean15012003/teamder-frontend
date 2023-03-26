@@ -1,8 +1,7 @@
-import { Box, Text, Card, Divider, Center } from '@chakra-ui/react'
+import { Box, Text, Card } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 
 const Module = (props) => {
-
   const { course } = props
 
   const navigate = useNavigate()
@@ -37,10 +36,11 @@ const Module = (props) => {
         alignItems='center'
       >
         <Text fontWeight='semibold' m='2'>
-        {course.courseName}
+          {course.courseName}
         </Text>
         <Text ml='10'>
-          You deserve better than toxic groupmates. Together we get better grades in {course.courseName}
+          You deserve better than toxic groupmates. Together we get better
+          grades in {course.courseName}
         </Text>
       </Box>
     </Card>
