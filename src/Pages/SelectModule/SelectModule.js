@@ -12,7 +12,10 @@ const SelectModule = () => {
 
   const displayCourseSelection = () => {
     return courses.map((course) => {
-      return <Module course={course} key={course.course} />
+
+      return (
+        <Module course={course} key={course.courseCode} />
+      )
     })
   }
 

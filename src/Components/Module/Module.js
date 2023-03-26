@@ -25,7 +25,7 @@ const Module = (props) => {
     >
       <Box display='flex' flexDir='column' justifyContent='center'>
         <Text fontWeight='bold' fontSize='md'>
-          {course.course}
+          {course.courseCode}
         </Text>
       </Box>
 

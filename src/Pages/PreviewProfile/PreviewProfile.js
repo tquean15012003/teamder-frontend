@@ -2,10 +2,13 @@ import UserProfile from './UserProfile'
 import { Box, Heading, Container, HStack, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import ProfileSetting from './ProfileSetting'
+import { useSelector } from 'react-redux'
 
 const PreviewProfile = () => {
 
   const [whichActive, setWhichActive] = useState(true)
+
+  const { userInfo } = useSelector(state => state.UserReducer)
 
   return (
     <>
@@ -53,7 +56,7 @@ const PreviewProfile = () => {
           </HStack>
         </Box>
         {
-          whichActive ? <UserProfile /> : <ProfileSetting />
+          userInfo.lookingFor.length === 0 ? <ProfileSetting /> : whichActive ? <UserProfile /> : <ProfileSetting />
         }
 
       </Container>

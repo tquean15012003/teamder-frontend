@@ -19,8 +19,10 @@ import { GrLocation } from 'react-icons/gr'
 import { useState } from 'react'
 import ReactModal from 'react-modal'
 
-const MatchInfo = ({ userInfo }) => {
-  console.log(userInfo)
+const MatchInfo = (props) => {
+
+  const { userInfo, imageSrc } = props
+
   const [isOpen, setIsOpen] = useState(false)
 
   const displaySkills = () => {
@@ -69,20 +71,13 @@ const MatchInfo = ({ userInfo }) => {
         {/* User Details */}
         <Box display='flex'>
           {/* Profile Pic */}
-          <Avatar src={userInfo.img} size='md' />
+          <Avatar src={imageSrc} size='md' />
 
           {/* User Name and School */}
           <Box display='flex' flexDir='column' fontWeight='650' ml='10px'>
             <Text> {userInfo.name}</Text>
             <Text> {userInfo.school}</Text>
           </Box>
-        </Box>
-
-        {/* Module or Project */}
-        <Box display='flex' ml='auto' alignItems='center'>
-          <Text fontSize='18px' fontWeight='bold' noOfLines={1}>
-            {userInfo.matched}
-          </Text>
         </Box>
       </Flex>
       <Divider borderColor='black' />
@@ -99,19 +94,19 @@ const MatchInfo = ({ userInfo }) => {
             left: 0,
             right: 0,
             bottom: 0,
-            borderRadius: '50px',
           },
           content: {
             position: 'absolute',
-            top: '10vh',
+            top: '50vh',
             left: '20vw',
             right: '20vw',
             bottom: 'auto',
             overflow: 'auto',
             WebkitOverflowScrolling: 'touch',
-            borderRadius: '010px',
+            borderRadius: '10px',
             background: 'whitesmoke',
             outline: 'none',
+            transform: "translateY(-50%)"
           },
         }}
       >
@@ -119,9 +114,9 @@ const MatchInfo = ({ userInfo }) => {
           <Card colorScheme='whiteAlpha'>
             <CardBody display='flex'>
               {/* Display Picture & Name */}
-              <Box>
+              <Flex direction="column" justify="center" align="center">
                 <Image
-                  src={userInfo.img}
+                  src={imageSrc}
                   maxWidth='250px'
                   borderRadius='200px'
                   objectFit='cover'
@@ -131,10 +126,10 @@ const MatchInfo = ({ userInfo }) => {
                   display='flex'
                   flexDir='column'
                   alignItems='center'
-                  fontWeight='semibold'
                   fontSize='20px'
                   mt='4'
                   gap='5px'
+                  fontWeight="semibold"
                 >
                   <Text>{userInfo.name}</Text>
 
@@ -142,15 +137,23 @@ const MatchInfo = ({ userInfo }) => {
                     <GrLocation />
                     <Text ml='2'>{userInfo.school}</Text>
                   </Flex>
-                  <Divider borderColor='grey.300' />
-                  <Box>
-                    <Text>Telegram: {userInfo.telegram}</Text>
-                  </Box>
-                  <Box>
-                    <Text>Instagram: {userInfo.instagram}</Text>
-                  </Box>
+                  <Divider borderColor='grey.500' />
+                  <Flex justify="space-between" align="center" gap="3">
+                    <Box>
+                      <a style={{ fontSize: "35px", color: "#0088cc" }} href={`https://telegram.me/yayharryyy${userInfo.telegram}`} target="_blank" rel="noreferrer"><i className="fab fa-telegram"></i></a>
+                    </Box>
+                    <Box>
+                      <a style={{ fontSize: "35px", color: "#C13584"}} href={`https://instagram.com/${userInfo.instagram}`} target="_blank" rel="noreferrer"><i className="fab fa-instagram"></i></a>
+                    </Box>
+                    <Box>
+                      <a style={{ fontSize: "35px", color: "#0077b5" }} href={`https://${userInfo.linkedin}`} target="_blank" rel="noreferrer"><i className="fab fa-linkedin"></i></a>
+                    </Box>
+                    <Box>
+                      <a style={{ fontSize: "35px", color: "black" }} href={`https://${userInfo.github}`} target="_blank" rel="noreferrer"><i className="fab fa-github"></i></a>
+                    </Box>
+                  </Flex>
                 </Box>
-              </Box>
+              </Flex>
 
               {/* Details */}
               <Container centerContent='false' ml='20px'>
@@ -212,7 +215,7 @@ const MatchInfo = ({ userInfo }) => {
                           transitionTimingFunction: 'ease-in-out',
                         }}
                       >
-                        {userInfo.CGPA}
+                        {userInfo?.CGPA?.toFixed(2)}
                       </ListItem>
                     </List>
                   </Box>

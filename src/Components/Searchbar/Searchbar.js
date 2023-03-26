@@ -4,6 +4,8 @@ import { useState } from 'react'
 const Searchbar = () => {
   const [text, setText] = useState('')
 
+  console.log(text)
+
   //to do implement search algorithm
   return (
     <Box mt='2%' mb='3%' w='90%'>

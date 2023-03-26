@@ -14,6 +14,7 @@ import Swipe from './Pages/Swipe/Swipe'
 import SelectModule from './Pages/SelectModule/SelectModule'
 
 function App() {
+  
   return (
     <Fragment>
       <Routes>
