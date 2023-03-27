@@ -1,4 +1,4 @@
-import { SET_USER_INFO } from '../Constants/UserConstants'
+import { SET_MATCH, SET_SWIPE_USER, SET_USER_INFO } from '../Constants/UserConstants'
 
 const stateDefault = {
   userInfo: {
@@ -26,12 +26,20 @@ const stateDefault = {
     telegram: '@yayharryyy',
     instagram: '_harry_tran',
   },
+  swipeUser: [],
+  match: []
 }
 
 export const UserReducer = (state = stateDefault, action) => {
   switch (action.type) {
     case SET_USER_INFO: {
       return { ...state, userInfo: action.userInfo }
+    }
+    case SET_SWIPE_USER: {
+      return { ...state, swipeUser: action.swipeUser }
+    } 
+    case SET_MATCH: {
+      return { ...state, match: action.match }
     }
     default:
       return { ...state }

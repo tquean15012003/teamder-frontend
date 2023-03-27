@@ -1,54 +1,28 @@
 import { Flex, Text, Avatar, Box, Divider } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import MatchInfo from './MatchInfo'
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { images, imageSrc } from '../../Settings/Settings'
+import { getMatchAction } from '../../Redux/Actions/UserActions'
 
-//hard coded data for demo
-const data = [
-  {
-    name: 'Harry Tran',
-    school: "NTU",
-    course: 'CE',
-    yearOfStudy: 3,
-    CGPA: 5,
-    bio: 'Energetic about the hardware products',
-    skills: ['Java', 'Flutter', 'DevOps', 'HTML', 'CSS', 'Agile', 'Waterfall', "Flask"],
-    lookingFor: ['SC3040', 'SC3010'],
-    linkedin: "linkedin.com/in/que-an-tran",
-    github: 'github.com/tquean15012003',
-    telegram: 'yayharryyy',
-    instagram: '_harry_tran',
-  },
-  {
-    name: 'Harry Ng',
-    school: "NTU",
-    course: 'CE',
-    yearOfStudy: 3,
-    CGPA: 5,
-    bio: 'Energetic about the hardware products',
-    skills: ['Java', 'Flutter', 'DevOps', 'HTML', 'CSS', 'Agile', 'Waterfall', "Flask"],
-    lookingFor: ['SC3040', 'SC3010'],
-    linkedin: "linkedin.com/in/que-an-tran",
-    github: 'github.com/tquean15012003',
-    telegram: 'yayharryyy',
-    instagram: '_harry_tran',
-  }
-]
 
 const Sidebar = () => {
   //to be fetched when the backend algorithm works
-  const matchedUsers = data
   const [open, setOpen] = useState(true)
 
-  const { userInfo } = useSelector((state) => state.UserReducer)
+  const { userInfo, match } = useSelector(state => state.UserReducer)
+
+  const dispatch = useDispatch()
 
   const navigate = useNavigate()
 
   const { pathname } = useLocation()
 
+  useEffect(() => {
+    dispatch(getMatchAction())
+  }, [dispatch])
   return (
     <>
       {open && (
@@ -105,7 +79,7 @@ const Sidebar = () => {
             <Divider orientation='horizontal' borderColor='black' />
             <Flex display='flex' flexDir='column'>
               {/*placeholder for later */}
-              {matchedUsers.map((user, index) => (
+              {match?.map((user, index) => (
                 <MatchInfo userInfo={user} imageSrc={images[index]} key={index} />
               ))}
             </Flex>

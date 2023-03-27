@@ -14,16 +14,12 @@ import {
   Divider,
   Flex,
 } from '@chakra-ui/react'
-import { useEffect } from 'react';
 import { GrLocation } from 'react-icons/gr'
-import { useDispatch, useSelector } from 'react-redux';
-import { getProfileAction } from '../../Redux/Actions/UserActions';
+import { useSelector } from 'react-redux';
 import { imageSrc } from '../../Settings/Settings';
 
 const UserProfile = () => {
   const { userInfo } = useSelector((state) => state.UserReducer)
-
-  const dispatch = useDispatch()
 
   const displaySkills = () => {
     return userInfo.skills.map((skill) => {
@@ -58,10 +54,6 @@ const UserProfile = () => {
       )
     })
   }
-
-  useEffect(() => {
-    dispatch(getProfileAction())
-  }, [dispatch])
 
   return (
     <Flex display='flex' justify='center' align='center' p='50px'>

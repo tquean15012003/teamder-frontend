@@ -1,116 +1,70 @@
-import { Button, Container, Flex } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import { Button, Container, Flex, Text } from '@chakra-ui/react'
+import React, { Fragment, useEffect, useState } from 'react'
 import SwipeCard from './SwipeCard';
 import TinderCard from 'react-tinder-card'
 import './Swipe.css'
-
-const cardList = [
-    {
-        id: 1,
-        image: 'https://img.icons8.com/color/452/GeeksforGeeks.png',
-        color: '#55ccff'
-    },
-    {
-        id: 2,
-        image: 'https://img.icons8.com/color/452/GeeksforGeeks.png',
-        color: '#e8e8e8'
-    },
-    {
-        id: 3,
-        image: 'https://img.icons8.com/color/452/GeeksforGeeks.png',
-        color: '#0a043c'
-    },
-    {
-        id: 4,
-        image: 'https://img.icons8.com/color/452/GeeksforGeeks.png',
-        color: 'black'
-    }
-];
-
-const cardList2 = [
-    {
-        id: 5,
-        image: 'https://img.icons8.com/color/452/GeeksforGeeks.png',
-        color: '#55ccff'
-    },
-    {
-        id: 6,
-        image: 'https://img.icons8.com/color/452/GeeksforGeeks.png',
-        color: '#e8e8e8'
-    },
-    {
-        id: 7,
-        image: 'https://img.icons8.com/color/452/GeeksforGeeks.png',
-        color: '#0a043c'
-    },
-    {
-        id: 8,
-        image: 'https://img.icons8.com/color/452/GeeksforGeeks.png',
-        color: 'black'
-    }
-];
-
+import { useDispatch } from 'react-redux';
+import { getProfileByCourseAction, swipeAction } from '../../Redux/Actions/UserActions';
+import { useParams } from 'react-router-dom';
 
 export default function Swipe() {
 
-    const [lastDirection, setLastDirection] = useState()
-    const [cards, setCards] = useState([])
-    const [currentIndex, setCurrentIndex] = useState()
+    // const { swipeUser } = useSelector(state => state.UserReducer)
 
-    console.log(cards)
+    const [haveSwiped, setHavedSwipe] = useState([])
 
-    const swiped = (direction, nameToDelete, id) => {
-        console.log(id)
-        console.log('direction: ' + direction)
-        console.log('removing: ' + nameToDelete)
-        setLastDirection(direction)
+    const [swipeUser, setSwipeUser] = useState([])
 
-    }
+    const dispatch = useDispatch()
 
-    const outOfFrame = (name) => {
-        console.log(cards)
-        console.log(name + ' left the screen!')
-        setCurrentIndex(currentIndex - 1)
-        if (currentIndex === 1) {
-            setCards([...cardList2])
-            setCurrentIndex(cardList2.length - 1)
-            console.log(1)
-        }
-    }
+    const { course } = useParams()
 
-    const handleClickButton = (direction) => {
+    const swiped = (direction) => {
         console.log(direction)
-        setCards([...cards.filter(card => card.id !== cards[currentIndex].id)])
-        setCurrentIndex(currentIndex - 1)
-        if (currentIndex === 0) {
-            setCards([...cardList2])
-            setCurrentIndex(cardList2.length - 1)
-            console.log(1)
-        }
+    }
+
+    const outOfFrame = (direction, username) => {
+        haveSwiped.push(username)
+        setHavedSwipe([...haveSwiped])
+        setSwipeUser([...swipeUser.filter(user => user.username !== username || !haveSwiped.includes(user.username))])
+        dispatch(swipeAction(direction, username))
+    }
+
+    const handleClickButton = (direction, username) => {
+        haveSwiped.push(username)
+        setHavedSwipe([...haveSwiped])
+        setSwipeUser([...swipeUser.filter(user => user.username !== username || !haveSwiped.includes(user.username))])
+        dispatch(swipeAction(direction, username))
     }
 
     useEffect(() => {
-        setCards([...cardList])
-        setCurrentIndex(cardList.length - 1)
-    }, [])
+        dispatch(getProfileByCourseAction(course, setSwipeUser))
+    }, [dispatch, course])
 
     return (
         <Container maxWidth='100%' centerContent={false} background='#F5F5F4'>
             <Flex justify="center" align="center" height="100%">
-                {cards.map((card) => (
-                    <TinderCard className='swipe' key={card.id} onSwipe={(direction) => swiped(direction, "Harry", card.id)} onCardLeftScreen={() => outOfFrame("Harry")} preventSwipe={['up', 'down']}>
-                        <SwipeCard className="card" />
-                    </TinderCard>
-                ))}
-                <Flex position="absolute" bottom="15%" gap="5">
-                    <Button onClick={() => {
-                        handleClickButton("left")
-                    }} colorScheme="red">Swipe Left</Button>
-                    <Button onClick={() => {
-                        handleClickButton("right")
-                    }}
-                        colorScheme="green">Swipe Right</Button>
-                </Flex>
+                {swipeUser.filter(user => !haveSwiped.includes(user.username))?.length !== 0 ?
+                    swipeUser?.filter(user => !haveSwiped.includes(user.username))?.map((user) => (
+                        <Fragment key={user.username}>
+                            <TinderCard className='swipe' onSwipe={(direction) => swiped(direction)} onCardLeftScreen={(direction) => outOfFrame(direction, user.username)} preventSwipe={['up', 'down']}>
+                                <SwipeCard user={user} className="card" />
+                            </TinderCard>
+                            <Flex position="absolute" bottom="15%" gap="5">
+                                <Button onClick={() => {
+                                    handleClickButton("left", user.username)
+                                }} colorScheme="red">Swipe Left</Button>
+                                <Button onClick={() => {
+                                    handleClickButton("right", user.username)
+                                }}
+                                    colorScheme="green">Swipe Right</Button>
+                            </Flex>
+                        </Fragment>
+                    ))
+                    :
+                    <Text fontSize="2xl" fontWeight="bold">You ran out of users in this module</Text>}
+
+
             </Flex>
         </Container>
     )

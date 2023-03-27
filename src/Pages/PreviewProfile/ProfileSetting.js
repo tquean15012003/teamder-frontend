@@ -25,8 +25,8 @@ const ProfileSetting = () => {
 
   const courseOptions = courses.map((course) => {
     return {
-      value: course.courseCode,
-      label: course.courseCode
+      value: course.course,
+      label: course.course
     }
   })
 

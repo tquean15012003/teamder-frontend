@@ -1,5 +1,5 @@
 import './App.css'
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import HomepageTemplate from './Templates/HomepageTemplate/HomepageTemplate'
@@ -15,6 +15,8 @@ import SelectModule from './Pages/SelectModule/SelectModule'
 
 function App() {
   
+
+
   return (
     <Fragment>
       <Routes>
@@ -35,7 +37,7 @@ function App() {
           element={<MainTemplate Component={PreviewProfile} />}
         />
 
-        <Route path='/swipe' element={<MainTemplate Component={Swipe} />} />
+        <Route path='/swipe/:course' element={<MainTemplate Component={Swipe} />} />
 
         <Route
           path='/selectmodule'

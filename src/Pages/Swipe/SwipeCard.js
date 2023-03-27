@@ -16,17 +16,54 @@ import {
 } from '@chakra-ui/react'
 import { GrLocation } from 'react-icons/gr'
 import React from 'react'
+import { images } from '../../Settings/Settings'
 
 export default function SwipeCard(props) {
 
+    const { user } = props
+
+    const displaySkills = () => {
+        return user.skills.map((skill) => {
+            return (
+                <WrapItem
+                    borderRadius='10px'
+                    background='gray.100'
+                    p='2'
+                    pt='1'
+                    pb='1'
+                    key={skill}
+                >
+                    {skill}
+                </WrapItem>
+            )
+        })
+    }
+
+    const displayLookingFor = () => {
+        return user.lookingFor.map((course) => {
+            return (
+                <WrapItem
+                    borderRadius='10px'
+                    background='gray.100'
+                    p='2'
+                    pt='1'
+                    pb='1'
+                    key={course}
+                >
+                    {course}
+                </WrapItem>
+            )
+        })
+    }
+
     return (
-        <Flex display='flex' justify='center' align="center" p='50px'>
+        <Flex display='flex' justify='center' align='center' p='50px'>
             <Card>
                 <CardBody display='flex'>
                     {/* Display Picture & Name */}
-                    <Box>
+                    <Flex flexDirection="column" justify="center" align="center">
                         <Image
-                            src='https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg'
+                            src={images[Math.floor(Math.random() * (99 - 0 + 0) + 0)]}
                             maxWidth='250px'
                             borderRadius='200px'
                             objectFit='cover'
@@ -40,14 +77,29 @@ export default function SwipeCard(props) {
                             fontSize='20px'
                             mt='4'
                         >
-                            <Text>John Cena An</Text>
+                            <Text>{user.name}</Text>
 
-                            <Flex align="center" justify="center">
+                            <Flex align='center' justify='center'>
                                 <GrLocation />
-                                <Text ml='2'>NTU</Text>
+                                <Text ml='2'>{user.school}</Text>
                             </Flex>
                         </Box>
-                    </Box>
+                        {/* <Divider borderColor='grey.500' margin="10px 0" />
+                        <Flex justify="space-between" align="center" gap="3">
+                            <Box>
+                                <a style={{ fontSize: "35px", color: "#0088cc" }} href={`https://telegram.me/yayharryyy${user.telegram}`} target="_blank" rel="noreferrer"><i className="fab fa-telegram"></i></a>
+                            </Box>
+                            <Box>
+                                <a style={{ fontSize: "35px", color: "#C13584" }} href={`https://instagram.com/${user.instagram}`} target="_blank" rel="noreferrer"><i className="fab fa-instagram"></i></a>
+                            </Box>
+                            <Box>
+                                <a style={{ fontSize: "35px", color: "#0077b5" }} href={`https://${user.linkedin}`} target="_blank" rel="noreferrer"><i className="fab fa-linkedin"></i></a>
+                            </Box>
+                            <Box>
+                                <a style={{ fontSize: "35px", color: "black" }} href={`https://${user.github}`} target="_blank" rel="noreferrer"><i className="fab fa-github"></i></a>
+                            </Box>
+                        </Flex> */}
+                    </Flex>
 
                     {/* Details */}
                     <Container centerContent='false' ml='20px'>
@@ -57,7 +109,7 @@ export default function SwipeCard(props) {
                             display='flex'
                         >
                             <Text fontWeight='bold' fontSize='24px' mb='3'>
-                                Looking for like-minded teammates to actualize brilliant ideas
+                                {user.bio}
                             </Text>
 
                             <Box>
@@ -79,7 +131,7 @@ export default function SwipeCard(props) {
                                             transitionTimingFunction: 'ease-in-out',
                                         }}
                                     >
-                                        Male
+                                        {user.course}
                                     </ListItem>
                                     <ListItem
                                         borderRadius='10px'
@@ -94,7 +146,7 @@ export default function SwipeCard(props) {
                                             transitionTimingFunction: 'ease-in-out',
                                         }}
                                     >
-                                        DSAI
+                                        Year {user.yearOfStudy}
                                     </ListItem>
                                     <ListItem
                                         borderRadius='10px'
@@ -109,22 +161,7 @@ export default function SwipeCard(props) {
                                             transitionTimingFunction: 'ease-in-out',
                                         }}
                                     >
-                                        Year 3
-                                    </ListItem>
-                                    <ListItem
-                                        borderRadius='10px'
-                                        background='gray.100'
-                                        p='2'
-                                        pt='1'
-                                        pb='1'
-                                        _hover={{
-                                            shadow: 'lg',
-                                            transform: 'translateY(-5px)',
-                                            transition: '0.2s',
-                                            transitionTimingFunction: 'ease-in-out',
-                                        }}
-                                    >
-                                        5.00
+                                        {user?.CGPA?.toFixed(2)}
                                     </ListItem>
                                 </List>
                             </Box>
@@ -135,142 +172,16 @@ export default function SwipeCard(props) {
                                 </Text>
 
                                 <Wrap spacing='15px' align='center' mb='3'>
-                                    <WrapItem
-                                        borderRadius='10px'
-                                        background='gray.100'
-                                        p='2'
-                                        pt='1'
-                                        pb='1'
-                                    >
-                                        NextJS
-                                    </WrapItem>
+                                    {displaySkills()}
+                                </Wrap>
+                            </Box>
+                            <Box>
+                                <Text fontWeight='bold' fontSize='24px' mb='2'>
+                                    Looking for
+                                </Text>
 
-                                    <WrapItem
-                                        borderRadius='10px'
-                                        background='gray.100'
-                                        p='2'
-                                        pt='1'
-                                        pb='1'
-                                        _hover={{
-                                            shadow: 'lg',
-                                            transform: 'translateY(-5px)',
-                                            transition: '0.2s',
-                                            transitionTimingFunction: 'ease-in-out',
-                                        }}
-                                    >
-                                        ExpressJS
-                                    </WrapItem>
-                                    <WrapItem
-                                        borderRadius='10px'
-                                        background='gray.100'
-                                        p='2'
-                                        pt='1'
-                                        pb='1'
-                                        _hover={{
-                                            shadow: 'lg',
-                                            transform: 'translateY(-5px)',
-                                            transition: '0.2s',
-                                            transitionTimingFunction: 'ease-in-out',
-                                        }}
-                                    >
-                                        PostgreSQL
-                                    </WrapItem>
-
-                                    <WrapItem
-                                        borderRadius='10px'
-                                        background='gray.100'
-                                        p='2'
-                                        pt='1'
-                                        pb='1'
-                                        _hover={{
-                                            shadow: 'lg',
-                                            transform: 'translateY(-5px)',
-                                            transition: '0.2s',
-                                            transitionTimingFunction: 'ease-in-out',
-                                        }}
-                                    >
-                                        DevOps
-                                    </WrapItem>
-
-                                    <WrapItem
-                                        borderRadius='10px'
-                                        background='gray.100'
-                                        p='2'
-                                        pt='1'
-                                        pb='1'
-                                        _hover={{
-                                            shadow: 'lg',
-                                            transform: 'translateY(-5px)',
-                                            transition: '0.2s',
-                                            transitionTimingFunction: 'ease-in-out',
-                                        }}
-                                    >
-                                        Agile
-                                    </WrapItem>
-
-                                    <WrapItem
-                                        borderRadius='10px'
-                                        background='gray.100'
-                                        p='2'
-                                        pt='1'
-                                        pb='1'
-                                        _hover={{
-                                            shadow: 'lg',
-                                            transform: 'translateY(-5px)',
-                                            transition: '0.2s',
-                                            transitionTimingFunction: 'ease-in-out',
-                                        }}
-                                    >
-                                        Python
-                                    </WrapItem>
-
-                                    <WrapItem
-                                        borderRadius='10px'
-                                        background='gray.100'
-                                        p='2'
-                                        pt='1'
-                                        pb='1'
-                                        _hover={{
-                                            shadow: 'lg',
-                                            transform: 'translateY(-5px)',
-                                            transition: '0.2s',
-                                            transitionTimingFunction: 'ease-in-out',
-                                        }}
-                                    >
-                                        Waterfall
-                                    </WrapItem>
-
-                                    <WrapItem
-                                        borderRadius='10px'
-                                        background='gray.100'
-                                        p='2'
-                                        pt='1'
-                                        pb='1'
-                                        _hover={{
-                                            shadow: 'lg',
-                                            transform: 'translateY(-5px)',
-                                            transition: '0.2s',
-                                            transitionTimingFunction: 'ease-in-out',
-                                        }}
-                                    >
-                                        Java
-                                    </WrapItem>
-
-                                    <WrapItem
-                                        borderRadius='10px'
-                                        background='gray.100'
-                                        p='2'
-                                        pt='1'
-                                        pb='1'
-                                        _hover={{
-                                            shadow: 'lg',
-                                            transform: 'translateY(-5px)',
-                                            transition: '0.2s',
-                                            transitionTimingFunction: 'ease-in-out',
-                                        }}
-                                    >
-                                        HTML
-                                    </WrapItem>
+                                <Wrap spacing='15px' align='center' mb='3'>
+                                    {displayLookingFor()}
                                 </Wrap>
                             </Box>
                         </Stack>

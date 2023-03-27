@@ -4,6 +4,7 @@ import { Container, Grid } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllCoursesAction } from '../../Redux/Actions/CourseAction'
+import { getProfileAction } from '../../Redux/Actions/UserActions'
 
 const SelectModule = () => {
   const { courses } = useSelector((state) => state.CourseReducer)
@@ -14,13 +15,17 @@ const SelectModule = () => {
     return courses.map((course) => {
 
       return (
-        <Module course={course} key={course.courseCode} />
+        <Module course={course} key={course.course} />
       )
     })
   }
 
   useEffect(() => {
     dispatch(getAllCoursesAction())
+  }, [dispatch])
+  
+  useEffect(() => {
+    dispatch(getProfileAction())
   }, [dispatch])
 
   return (
