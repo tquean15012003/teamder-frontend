@@ -20,7 +20,7 @@ const Module = (props) => {
         transitionTimingFunction: 'ease-in-out',
       }}
       onClick={() => {
-        navigate('/swipe', { replace: false })
+        navigate(`/swipe/${course.course}`, { replace: false })
       }}
     >
       <Box display='flex' flexDir='column' justifyContent='center'>
@@ -36,11 +36,11 @@ const Module = (props) => {
         alignItems='center'
       >
         <Text fontWeight='semibold' m='2'>
-          {course.courseName}
+          {course.name}
         </Text>
         <Text ml='10'>
           You deserve better than toxic groupmates. Together we get better
-          grades in {course.courseName}
+          grades in {course.name}
         </Text>
       </Box>
     </Card>

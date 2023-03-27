@@ -15,7 +15,8 @@ import {
   Flex,
 } from '@chakra-ui/react'
 import { GrLocation } from 'react-icons/gr'
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
+import { imageSrc } from '../../Settings/Settings';
 
 const UserProfile = () => {
   const { userInfo } = useSelector((state) => state.UserReducer)
@@ -59,9 +60,9 @@ const UserProfile = () => {
       <Card>
         <CardBody display='flex'>
           {/* Display Picture & Name */}
-          <Box>
+          <Flex flexDirection="column" justify="center" align="center">
             <Image
-              src='https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg'
+              src={imageSrc}
               maxWidth='250px'
               borderRadius='200px'
               objectFit='cover'
@@ -82,7 +83,22 @@ const UserProfile = () => {
                 <Text ml='2'>{userInfo.school}</Text>
               </Flex>
             </Box>
-          </Box>
+            <Divider borderColor='grey.500' margin="10px 0" />
+            <Flex justify="space-between" align="center" gap="3">
+              <Box>
+                <a style={{ fontSize: "35px", color: "#0088cc" }} href={`https://telegram.me/yayharryyy${userInfo.telegram}`} target="_blank" rel="noreferrer"><i className="fab fa-telegram"></i></a>
+              </Box>
+              <Box>
+                <a style={{ fontSize: "35px", color: "#C13584" }} href={`https://instagram.com/${userInfo.instagram}`} target="_blank" rel="noreferrer"><i className="fab fa-instagram"></i></a>
+              </Box>
+              <Box>
+                <a style={{ fontSize: "35px", color: "#0077b5" }} href={`https://${userInfo.linkedin}`} target="_blank" rel="noreferrer"><i className="fab fa-linkedin"></i></a>
+              </Box>
+              <Box>
+                <a style={{ fontSize: "35px", color: "black" }} href={`https://${userInfo.github}`} target="_blank" rel="noreferrer"><i className="fab fa-github"></i></a>
+              </Box>
+            </Flex>
+          </Flex>
 
           {/* Details */}
           <Container centerContent='false' ml='20px'>
@@ -144,7 +160,7 @@ const UserProfile = () => {
                       transitionTimingFunction: 'ease-in-out',
                     }}
                   >
-                    {userInfo.CGPA}
+                    {userInfo?.CGPA?.toFixed(2)}
                   </ListItem>
                 </List>
               </Box>

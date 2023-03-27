@@ -9,17 +9,19 @@ import {
   Select as SelectChakra,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
-import img from "../../Assets/ProfileImages/HarryPic.jfif"; //test image
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCoursesAction } from '../../Redux/Actions/CourseAction';
-import { useEffect, useState } from 'react';
-import { skillList } from '../../Settings/Settings';
+import { useEffect } from 'react';
+import { imageSrc, skillList } from '../../Settings/Settings';
+import * as Yup from 'yup'
+import { updateProfileAction } from '../../Redux/Actions/UserActions';
 
 const ProfileSetting = () => {
 
   const { courses } = useSelector(state => state.CourseReducer)
 
   const { userInfo } = useSelector(state => state.UserReducer)
+
 
   const courseOptions = courses.map((course) => {
     return {
@@ -37,29 +39,49 @@ const ProfileSetting = () => {
 
   const dispatch = useDispatch()
 
-  const [skills, setSkills] = useState(userInfo.skills)
-
-  const [lookingFor, setLookingFor] = useState(userInfo.lookingFor)
-
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      name: userInfo.name,
+      name: userInfo.name ? userInfo.name : "",
       school: userInfo.school,
-      gender: userInfo.gender,
       yearOfStudy: userInfo.yearOfStudy,
       course: userInfo.course,
-      CGPA: userInfo.CGPA,
-      bio: userInfo.bio,
-      skills: skills,
-      lookingFor: lookingFor,
-      linkedin: userInfo.linkedin,
-      github: userInfo.github,
-      telegram: userInfo.telegram,
-      instagram: userInfo.instagram,
+      CGPA: userInfo.CGPA ? userInfo.CGPA : 0,
+      bio: userInfo.bio ? userInfo.bio : "",
+      skills: userInfo.skills,
+      lookingFor: userInfo.lookingFor,
+      linkedin: userInfo.linkedin ? userInfo.linkedin : "",
+      github: userInfo.github ?  userInfo.github : "",
+      telegram: userInfo.telegram ? userInfo.telegram : "",
+      instagram: userInfo.instagram ? userInfo.instagram : "",
     },
+    validationSchema: Yup.object({
+      name: Yup.string()
+      .required("Required!"),
+      school: Yup.string()
+      .required("Required!"),
+      yearOfStudy: Yup.number()
+      .required("Required!"),
+      course: Yup.string()
+      .required("Required!"),
+      CGPA: Yup.number()
+      .required("Required!")
+      .integer()
+      .min(0)
+      .max(5),
+      bio: Yup.string()
+      .required("Required!"),
+      linkedin: Yup.string()
+      .required("Required!"),
+      github: Yup.string()
+      .required("Required!"),
+      telegram: Yup.string()
+      .required("Required!"),
+      instagram: Yup.string()
+      .required("Required!"),
+    }),
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(updateProfileAction(values))
     },
   });
 
@@ -94,7 +116,7 @@ const ProfileSetting = () => {
         {/* Profile picture and other information */}
         <Flex alignItems="center" justifyContent="space-between">
           <Avatar
-            src={img}
+            src={imageSrc}
             name="Harry Tran"
             size="2xl"
             marginLeft="20px"
@@ -117,7 +139,7 @@ const ProfileSetting = () => {
                 variant="outline"
                 fontSize="lg"
                 backgroundColor="white"
-                placeholder="Name"
+                placeholder="Jeannette Lee"
                 width="30%"
                 mr="15%"
                 id="name"
@@ -204,10 +226,10 @@ const ProfileSetting = () => {
                 value={formik.values.yearOfStudy}
                 onChange={formik.handleChange}
               >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
               </SelectChakra>
             </Flex>
             {/* Course and CGPA */}
@@ -222,22 +244,20 @@ const ProfileSetting = () => {
               >
                 CGPA
               </Text>
-              <SelectChakra
-                width="30%"
+              <Input
                 variant="outline"
                 fontSize="lg"
                 backgroundColor="white"
-                placeholder="Select"
+                placeholder="4"
+                width="30%"
+                mr="15%"
                 id="CGPA"
+                type="number"
+                min={0}
+                max={5}
                 value={formik.values.CGPA}
                 onChange={formik.handleChange}
-              >
-                <option value="4.50-5.00">4.50-5.00</option>
-                <option value="4.00-4.49">4.00-4.49</option>
-                <option value="3.50-3.99">3.50-3.99</option>
-                <option value="3.00-3.49">3.00-3.49</option>
-                <option value="2.00-2.99">2.00-2.99</option>
-              </SelectChakra>
+              />
             </Flex>
           </Box>
         </Flex>
@@ -263,7 +283,7 @@ const ProfileSetting = () => {
             onChange={formik.handleChange}
             required
             id="bio"
-            placeholder="Your bio"
+            placeholder="Bio"
           />
         </Flex>
         <hr
@@ -282,7 +302,7 @@ const ProfileSetting = () => {
             <Flex justifyContent="space-between" alignItems="center">
               <Select
                 width="85%"
-                value={courseOptions.filter(course => lookingFor.includes(course.value))}
+                value={courseOptions.filter(course => formik.values.lookingFor.includes(course.value))}
                 isMulti
                 name="lookingFor"
                 options={courseOptions}
@@ -290,7 +310,7 @@ const ProfileSetting = () => {
                 classNamePrefix="select"
                 onChange={(e) => {
                   const newLookingFor = e.map((course) => { return course.value })
-                  setLookingFor([...newLookingFor])
+                  formik.setFieldValue("lookingFor", newLookingFor)
                 }}
               />
             </Flex>
@@ -304,7 +324,7 @@ const ProfileSetting = () => {
             <Flex justifyContent="space-between" alignItems="center">
               <Select
                 width="85%"
-                value={skillOptions.filter(skill => skills.includes(skill.value))}
+                value={skillOptions.filter(skill => formik.values.skills.includes(skill.value))}
                 isMulti
                 name="skills"
                 options={skillOptions}
@@ -312,8 +332,9 @@ const ProfileSetting = () => {
                 classNamePrefix="select"
                 onChange={(e) => {
                   const newSkills = e.map((skill) => { return skill.value })
-                  console.log(e)
-                  setSkills([...newSkills])
+                  formik.setFieldValue("skills", newSkills)
+
+
                 }}
               />
             </Flex>
@@ -348,7 +369,7 @@ const ProfileSetting = () => {
                 required
                 id="linkedin"
                 type="text"
-                placeholder="Linked In"
+                placeholder="linkedin.com/..."
               />
             </Flex>
             {/* GitHub */}
@@ -367,7 +388,7 @@ const ProfileSetting = () => {
                 required
                 id="github"
                 type="text"
-                placeholder="GitHub"
+                placeholder="github.com/..."
               />
             </Flex>
           </Box>
@@ -389,10 +410,10 @@ const ProfileSetting = () => {
             {/* Telegram */}
             <Flex justifyContent="space-between" alignItems="center">
               <Text color="#606162" fontWeight="bold" fontSize="xl" mb="3">
-                Telegram
+                Telegram handle
               </Text>
               <Input
-                width="85%"
+                width="80%"
                 size="lg"
                 backgroundColor="white"
                 borderRadius="7px"
@@ -402,16 +423,16 @@ const ProfileSetting = () => {
                 required
                 id="telegram"
                 type="text"
-                placeholder="Telegram"
+                placeholder="yayharry"
               />
             </Flex>
             {/* Instagram */}
             <Flex justifyContent="space-between" alignItems="center">
               <Text color="#606162" fontWeight="bold" fontSize="xl" mb="3">
-                Instagram
+                Instagram handle
               </Text>
               <Input
-                width="85%"
+                width="80%"
                 size="lg"
                 backgroundColor="white"
                 borderRadius="7px"
@@ -421,7 +442,7 @@ const ProfileSetting = () => {
                 required
                 id="instagram"
                 type="text"
-                placeholder="Instagram"
+                placeholder="_harry_tran"
               />
             </Flex>
           </Box>

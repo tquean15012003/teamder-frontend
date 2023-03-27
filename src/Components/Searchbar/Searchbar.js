@@ -2,7 +2,9 @@ import { Box, InputGroup, Input, InputRightElement } from '@chakra-ui/react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useState } from 'react'
 const Searchbar = () => {
-  const [text, setText] = useState('')
+  const [text, setText] = useState("")
+
+  console.log(text)
 
   //to do implement search algorithm
   return (

@@ -1,9 +1,19 @@
 import { Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
 import { FiMenu } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
+import { TOKEN, USERNAME } from '../../Settings/Settings'
 
 const TopMenu = () => {
+
   const navigate = useNavigate()
+
+  const logOut = () => {
+    navigate('/', { replace: false })
+    localStorage.removeItem(USERNAME)
+    localStorage.removeItem(TOKEN)
+    window.location.reload()
+  }
+
   return (
     <Menu>
       <MenuButton
@@ -23,7 +33,9 @@ const TopMenu = () => {
         </MenuItem>
         {/*only if user if logged in */}
         <MenuItem
-          onClick={() => navigate('/', { replace: false })}
+          onClick={() => {
+            logOut()
+          }}
         >Logout</MenuItem>
       </MenuList>
     </Menu>

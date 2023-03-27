@@ -1,5 +1,5 @@
 import { authService } from "../../Services/AuthService"
-import { SUCCESSFULLY_CREATED, TOKEN } from "../../Settings/Settings"
+import { SUCCESSFULLY_CREATED, TOKEN, USERNAME } from "../../Settings/Settings"
 
 export const logInAction = (logInInfo, navigate) => {
     return async (dispatch, getState) => {
@@ -7,6 +7,8 @@ export const logInAction = (logInInfo, navigate) => {
             const data = await authService.logInService(logInInfo)
             if (data.status === SUCCESSFULLY_CREATED) {
                 localStorage.setItem(TOKEN, data.data.accessToken)
+                localStorage.setItem(USERNAME, logInInfo.username)
+
                 navigate('/selectmodule', { replace: false })
             }
             console.log(data)
