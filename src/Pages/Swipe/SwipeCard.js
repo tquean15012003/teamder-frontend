@@ -58,7 +58,7 @@ export default function SwipeCard(props) {
 
     return (
         <Flex display='flex' justify='center' align='center' p='50px'>
-            <Card>
+            <Card height="lg" width="4xl">
                 <CardBody display='flex'>
                     {/* Display Picture & Name */}
                     <Flex flexDirection="column" justify="center" align="center">
@@ -102,7 +102,7 @@ export default function SwipeCard(props) {
                     </Flex>
 
                     {/* Details */}
-                    <Container centerContent='false' ml='20px'>
+                    <Container ml='20px'>
                         {/* User Description */}
                         <Stack
                             divider={<StackDivider borderColor='gray.500' />}
