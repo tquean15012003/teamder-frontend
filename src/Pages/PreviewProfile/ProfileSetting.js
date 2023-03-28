@@ -64,11 +64,8 @@ const ProfileSetting = () => {
       .required("Required!"),
       course: Yup.string()
       .required("Required!"),
-      CGPA: Yup.number()
-      .required("Required!")
-      .integer()
-      .min(0)
-      .max(5),
+      CGPA: Yup.string()
+      .required("Required!"),
       bio: Yup.string()
       .required("Required!"),
       linkedin: Yup.string()
@@ -81,6 +78,8 @@ const ProfileSetting = () => {
       .required("Required!"),
     }),
     onSubmit: (values) => {
+      formik.setFieldValue("CGPA", parseFloat(formik.values.CGPA))
+      formik.setFieldValue("yearOfStudy", parseFloat(formik.values.yearOfStudy))
       dispatch(updateProfileAction(values))
     },
   });
@@ -120,7 +119,6 @@ const ProfileSetting = () => {
             name="Harry Tran"
             size="2xl"
             marginLeft="20px"
-            cursor="pointer"
           />
           <Box width="75%">
 
@@ -252,7 +250,6 @@ const ProfileSetting = () => {
                 width="30%"
                 mr="15%"
                 id="CGPA"
-                type="number"
                 min={0}
                 max={5}
                 value={formik.values.CGPA}

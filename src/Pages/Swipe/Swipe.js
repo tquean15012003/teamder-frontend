@@ -50,7 +50,7 @@ export default function Swipe() {
                             <TinderCard className='swipe' onSwipe={(direction) => swiped(direction)} onCardLeftScreen={(direction) => outOfFrame(direction, user.username)} preventSwipe={['up', 'down']}>
                                 <SwipeCard user={user} className="card" />
                             </TinderCard>
-                            <Flex position="absolute" bottom="15%" gap="5">
+                            <Flex position="absolute" bottom="2%" gap="5">
                                 <Button onClick={() => {
                                     handleClickButton("left", user.username)
                                 }} colorScheme="red">Swipe Left</Button>

@@ -10,7 +10,7 @@ const updateUserInfoInReducer = (userInfo) => ({
 export const updateProfileAction = (userInfo) => {
     return async (dispatch, getState) => {
         try {
-            await userService.updateProfileService({...userInfo, yearOfStudy: parseInt(userInfo.yearOfStudy)})
+            await userService.updateProfileService(userInfo)
             dispatch(updateUserInfoInReducer(userInfo))
             alert("Update profile successfully!")
         } catch (error) {

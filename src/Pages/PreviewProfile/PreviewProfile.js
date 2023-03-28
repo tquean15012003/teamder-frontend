@@ -2,13 +2,21 @@ import UserProfile from './UserProfile'
 import { Box, Heading, Container, HStack, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import ProfileSetting from './ProfileSetting'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getProfileAction } from '../../Redux/Actions/UserActions'
 
 const PreviewProfile = () => {
 
   const [whichActive, setWhichActive] = useState(true)
 
   const { userInfo } = useSelector(state => state.UserReducer)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getProfileAction())
+  }, [dispatch])
 
   return (
     <>

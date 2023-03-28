@@ -140,7 +140,7 @@ const MatchInfo = (props) => {
                   <Divider borderColor='grey.500' />
                   <Flex justify="space-between" align="center" gap="3">
                     <Box>
-                      <a style={{ fontSize: "35px", color: "#0088cc" }} href={`https://telegram.me/yayharryyy${userInfo.telegram}`} target="_blank" rel="noreferrer"><i className="fab fa-telegram"></i></a>
+                      <a style={{ fontSize: "35px", color: "#0088cc" }} href={`https://telegram.me/${userInfo.telegram}`} target="_blank" rel="noreferrer"><i className="fab fa-telegram"></i></a>
                     </Box>
                     <Box>
                       <a style={{ fontSize: "35px", color: "#C13584"}} href={`https://instagram.com/${userInfo.instagram}`} target="_blank" rel="noreferrer"><i className="fab fa-instagram"></i></a>
