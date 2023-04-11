@@ -26,10 +26,13 @@ const TopMenu = () => {
         <FiMenu fontSize='30px' />
       </MenuButton>
       <MenuList>
-        <MenuItem
-          onClick={() => navigate('/changepassword', { replace: false })}
-        >
+        <MenuItem onClick={() => navigate('/changepassword', { replace: false })} >
           Change Password
+        </MenuItem>
+        <MenuItem>
+          <a style={{width: "100%", height: "100%"}} href="https://forms.gle/QJjvvPHVaGWm7ewz8" target="_blank" rel="noreferrer">
+            Feedback
+          </a>
         </MenuItem>
         {/*only if user if logged in */}
         <MenuItem

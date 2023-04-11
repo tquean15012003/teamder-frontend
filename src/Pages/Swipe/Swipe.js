@@ -4,7 +4,7 @@ import SwipeCard from './SwipeCard';
 import TinderCard from 'react-tinder-card'
 import './Swipe.css'
 import { useDispatch } from 'react-redux';
-import { getProfileByCourseAction, swipeAction } from '../../Redux/Actions/UserActions';
+import { getProfileAction, getProfileByCourseAction, swipeAction } from '../../Redux/Actions/UserActions';
 import { useParams } from 'react-router-dom';
 
 export default function Swipe() {
@@ -39,6 +39,7 @@ export default function Swipe() {
 
     useEffect(() => {
         dispatch(getProfileByCourseAction(course, setSwipeUser))
+        dispatch(getProfileAction())
     }, [dispatch, course])
 
     return (

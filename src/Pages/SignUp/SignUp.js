@@ -31,7 +31,7 @@ export default function SignUp() {
       username: Yup.string()
         .required("Please enter your username")
         .min(8, 'Minimum 8 characters required')
-        .max(20, 'Maximum 20 characters only'),
+        .max(20, 'Maximum 20 characters'),
 
       password: Yup.string()
         .required('Please enter your  password')
